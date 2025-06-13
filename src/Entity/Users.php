@@ -64,6 +64,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $category_id = null;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Categories $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -253,6 +256,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCategoryId(int $category_id): static
     {
         $this->category_id = $category_id;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Categories
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Categories $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
