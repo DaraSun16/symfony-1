@@ -24,6 +24,9 @@ class Review
     #[ORM\Column(length: 255)]
     private ?string $commit = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Users $review_users = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class Review
     public function setCommit(string $commit): static
     {
         $this->commit = $commit;
+
+        return $this;
+    }
+
+    public function getReviewUsers(): ?Users
+    {
+        return $this->review_users;
+    }
+
+    public function setReviewUsers(?Users $review_users): static
+    {
+        $this->review_users = $review_users;
 
         return $this;
     }

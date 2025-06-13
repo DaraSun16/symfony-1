@@ -18,6 +18,9 @@ class Comment
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Courses $courses = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -31,6 +34,18 @@ class Comment
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCourses(): ?Courses
+    {
+        return $this->courses;
+    }
+
+    public function setCourses(?Courses $courses): static
+    {
+        $this->courses = $courses;
 
         return $this;
     }

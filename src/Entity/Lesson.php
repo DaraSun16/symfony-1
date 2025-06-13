@@ -21,6 +21,9 @@ class Lesson
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Courses $lesson_course = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,6 +56,18 @@ class Lesson
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getLessonCourse(): ?Courses
+    {
+        return $this->lesson_course;
+    }
+
+    public function setLessonCourse(?Courses $lesson_course): static
+    {
+        $this->lesson_course = $lesson_course;
 
         return $this;
     }

@@ -40,6 +40,9 @@ class Courses
     #[ORM\Column(length: 255)]
     private ?string $level = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Review $courses_review = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -144,6 +147,18 @@ class Courses
     public function setLevel(string $level): static
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    public function getCoursesReview(): ?Review
+    {
+        return $this->courses_review;
+    }
+
+    public function setCoursesReview(?Review $courses_review): static
+    {
+        $this->courses_review = $courses_review;
 
         return $this;
     }

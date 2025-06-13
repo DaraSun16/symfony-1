@@ -18,6 +18,9 @@ class ForgotPassword
     #[ORM\Column(length: 255)]
     private ?string $token = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Users $users = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -31,6 +34,18 @@ class ForgotPassword
     public function setToken(string $token): static
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getUsers(): ?Users
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Users $users): static
+    {
+        $this->users = $users;
 
         return $this;
     }

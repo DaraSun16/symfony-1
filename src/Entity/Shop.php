@@ -40,6 +40,9 @@ class Shop
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
     private ?string $discount_numeric = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Categories $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +140,18 @@ class Shop
     public function setDiscountNumeric(?string $discount_numeric): static
     {
         $this->discount_numeric = $discount_numeric;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Categories
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Categories $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }

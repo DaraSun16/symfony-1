@@ -19,6 +19,9 @@ class Order
     #[ORM\Column(length: 255)]
     private ?string $pictures = null;
 
+    #[ORM\ManyToOne(inversedBy: 'payment_order')]
+    private ?Payment $payment = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -32,6 +35,18 @@ class Order
     public function setPictures(string $pictures): static
     {
         $this->pictures = $pictures;
+
+        return $this;
+    }
+
+    public function getPayment(): ?Payment
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?Payment $payment): static
+    {
+        $this->payment = $payment;
 
         return $this;
     }

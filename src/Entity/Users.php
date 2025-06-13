@@ -67,6 +67,15 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Categories $category = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Courses $users_courses = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Comment $users_comment = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Payment $users_payment = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -268,6 +277,42 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCategory(?Categories $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getUsersCourses(): ?Courses
+    {
+        return $this->users_courses;
+    }
+
+    public function setUsersCourses(?Courses $users_courses): static
+    {
+        $this->users_courses = $users_courses;
+
+        return $this;
+    }
+
+    public function getUsersComment(): ?Comment
+    {
+        return $this->users_comment;
+    }
+
+    public function setUsersComment(?Comment $users_comment): static
+    {
+        $this->users_comment = $users_comment;
+
+        return $this;
+    }
+
+    public function getUsersPayment(): ?Payment
+    {
+        return $this->users_payment;
+    }
+
+    public function setUsersPayment(?Payment $users_payment): static
+    {
+        $this->users_payment = $users_payment;
 
         return $this;
     }
