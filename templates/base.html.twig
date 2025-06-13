@@ -1,16 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="zxx">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+            <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+            <link rel="stylesheet" href="{{asset('css/animate.min.css')}}">
+            <link rel="stylesheet" href="{{asset('css/aos.min.css')}}">
+            <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+            <link rel="stylesheet" href="{{asset('css/icofont.min.css')}}">
+            <link rel="stylesheet" href="{{asset('css/slick.css')}}">
+            <link rel="stylesheet" href="{{asset('css/swiper-bundle.min.css')}}">
+            <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        
+        
+            <script>
+                // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+                if (localStorage.getItem("theme-color") === "dark" || (!("theme-color" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.classList.add("is_dark");
+                } 
+                if (localStorage.getItem("theme-color") === "light") {
+                document.documentElement.classList.remove("is_dark");
+                } 
+            </script>
+            <meta http-equiv="x-ua-compatible" content="ie=edge">
+            <title>Login/Register | Edurock - Education LMS Template</title>
+            <meta name="description" content="">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+                <script src="{{asset('js/vendor/modernizr-3.5.0.min.js')}}"></script>
+                <script src="{{asset('js/vendor/jquery-3.6.0.min.js')}}"></script>
+                <script src="{{asset('js/popper.min.js')}}"></script>
+                <script src="{{asset('js/bootstrap.min.js')}}"></script>
+                <script src="{{asset('js/isotope.pkgd.min.js')}}"></script>
+                <script src="{{asset('js/slick.min.js')}}"></script>
+                <script src="{{asset('js/jquery.meanmenu.min.js')}}"></script>
+                <script src="{{asset('js/ajax-form.js')}}"></script>
+                <script src="{{asset('js/wow.min.js')}}"></script>
+                <script src="{{asset('js/jquery.scrollUp.min.js')}}"></script>
+                <script src="{{asset('js/imagesloaded.pkgd.min.js')}}"></script>
+                <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+                <script src="{{asset('js/waypoints.min.js')}}"></script>
+                <script src="{{asset('js/jquery.counterup.min.js')}}"></script>
+                <script src="{{asset('js/plugins.js')}}"></script>
+                <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
+                <script src="{{asset('js/main.js')}}"></script>
         {% block stylesheets %}
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+        <body>
+            {% include '_partials/loader.html.twig' %}
+            {% include '_partials/dark.html.twig' %}
+            <main class='main_wrapper overflow-hidden'>
+                {% block body %}{% endblock %}
+                {% import '_partials/footer.html.twig' as footer %}
+            </main>
+            {% include '_partials/topbar.html.twig' %}
+            {% include '_partials/menu.html.twig' %}
+        </body>
 </html>
