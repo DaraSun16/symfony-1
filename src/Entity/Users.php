@@ -46,23 +46,15 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $user_name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $mail = null;
-
     #[ORM\Column(length: 13)]
     private ?string $phone_number = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $biography = null;
 
-    #[ORM\Column]
-    private array $role = [];
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
-
-    #[ORM\Column]
-    private ?int $category_id = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Categories $category = null;
@@ -197,17 +189,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMail(): ?string
-    {
-        return $this->mail;
-    }
 
-    public function setMail(string $mail): static
-    {
-        $this->mail = $mail;
-
-        return $this;
-    }
 
     public function getPhoneNumber(): ?string
     {
@@ -229,18 +211,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBiography(?string $biography): static
     {
         $this->biography = $biography;
-
-        return $this;
-    }
-
-    public function getRole(): array
-    {
-        return $this->role;
-    }
-
-    public function setRole(array $role): static
-    {
-        $this->role = $role;
 
         return $this;
     }
