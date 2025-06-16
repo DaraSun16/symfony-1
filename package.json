@@ -1,0 +1,26 @@
+{
+  "name": "symfony-1",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/DaraSun16/natsu#readme",
+  "bugs": {
+    "url": "https://github.com/DaraSun16/natsu/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaraSun16/natsu.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "symfony": "^0.0.1"
+  }
+}

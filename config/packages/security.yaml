@@ -10,17 +10,25 @@ security:
                 class: App\Entity\Users
                 property: email
     firewalls:
-        dev:
+        dev: #developpeur
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+        main: #production
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\UsersAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: app_login
+
+            two_factor:
+                auth_form_path: 2fa_login    # The route name you have used in the routes.yaml
+                check_path: 2fa_login_check  # The route name you have used in the routes.yaml
+
+            login_throttling:
+                max_attempts: 3
+                interval: '5 minutes'
 
             remember_me:
                 secret: '%kernel.secret%'
@@ -39,8 +47,10 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
+        # Other rules may follow here...
 
-when@test:
+when@test: #Algorithme de chiffrement de mdp
     security:
         password_hashers:
             # By default, password hashers are resource intensive and take time. This is
@@ -49,6 +59,6 @@ when@test:
             # reduces the work factor to the lowest possible values.
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
+                cost: 4 # Lowest possible value for bcrypt, peut etre augmenté a 15 ou diminuer a 1
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
