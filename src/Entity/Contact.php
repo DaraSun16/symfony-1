@@ -43,6 +43,65 @@
     message:"I gotcha you weren't able to send spams'"
   )]
   private string $message;
- }
 
+   // Getter et Setter pour $name
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    // Getter et Setter pour $email
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    // Getter et Setter pour $service
+    public function getService(): string
+    {
+        return $this->service;
+    }
+
+    public function setService(string $service): self
+    {
+        $this->service = $service;
+        return $this;
+    }
+
+    // Getter et Setter pour $phoneNumber
+    public function getPhoneNumber(): string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
+        return $this;
+    }
+
+    // Getter et Setter pour $message
+    public function getMessage(): string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): self
+    {
+        $this->message = $message;
+        return $this;
+    }
+}
 ?>
