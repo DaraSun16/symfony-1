@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
@@ -55,8 +54,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface, TwoFac
     private ?string $biography = null;
 
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $picture = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Categories $category = null;
@@ -220,29 +217,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface, TwoFac
         return $this;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): static
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    public function getCategoryId(): ?int
-    {
-        return $this->category_id;
-    }
-
-    public function setCategoryId(int $category_id): static
-    {
-        $this->category_id = $category_id;
-
-        return $this;
-    }
 
     public function getCategory(): ?Categories
     {
