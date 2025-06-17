@@ -73,11 +73,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface, TwoFac
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $authCode;
 
-    #[Vich\UploadableField(mapping: 'avatar', fileNameProperty: 'imageName', size: 'imageSize')]
+    #[Vich\UploadableField(mapping: 'avatar', fileNameProperty: 'imageName', size: 'imageSize', mimeType: 'imageMime')]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageMime = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;
@@ -339,5 +342,16 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface, TwoFac
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    public function getImageMime(): ?string
+    {
+        return $this->imageMime;
+    }
+
+    public function setImageMime(?string $imageMime): self
+    {
+        $this->imageMime = $imageMime;
+        return $this;
     }
 }
