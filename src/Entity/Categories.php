@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
@@ -26,7 +27,7 @@ class Categories
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
@@ -45,6 +46,10 @@ class Categories
     private Collection $users;
 
     #[Vich\UploadableField(mapping: 'categorie', fileNameProperty: 'imageName', size: 'imageSize', mimeType: 'imageMime')]
+    #[Assert\File(
+    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
+    mimeTypesMessage: 'Please upload a valid image (jpeg, jpg, png, webp).'
+)]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
