@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -13,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegistrationForm extends AbstractType
 {
@@ -40,11 +42,29 @@ class RegistrationForm extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+            ->add('plainPassword', RepeatedType::class, [
+                'type'=> PasswordType::class,
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'invalid_message'=>'Les deux mots de passe doivent être identiques',
+                'first_options'=>[
+                    'label'=> false,
+                    'attr'=>[
+                        'autocomplete'=>'new-password',
+                        'class'=>'common__login_input',
+                        'placeholder'=>'Ce que tu veux',
+                    ],
+                    'toggle'=> true,
+                ],
+                'second_options'=>[
+                    'label'=> false,
+                    'attr'=>[
+                        'autocomplete'=>'new-password',
+                        'class'=>'common__login_input',
+                        'placeholder'=>'Autre chose',
+                    ],
+                    'toggle'=> true,
+                ],
+                // 'attr' => ['autocomplete' => 'new-password'],   delete that
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -55,9 +75,12 @@ class RegistrationForm extends AbstractType
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
+                    new Regex([
+                        'pattern' => '/^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[\W_]).+$/',
+                        'message' => 'Your password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
+                    ]),
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
