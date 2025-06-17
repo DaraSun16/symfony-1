@@ -11,7 +11,7 @@ class MenuController extends AbstractController
 
   public function navbar(): Response
   {
-    return $this->render('_partials/menu.html.twig', ['categories'=>$this->categoriesRepository->findAll()]);
+    return $this->render('_partials/menu.html.twig', ['categories'=>$this->categoriesRepository->findBy(['parent'=>null])]);
   }
 }
 
