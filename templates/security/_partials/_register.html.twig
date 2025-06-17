@@ -7,21 +7,21 @@
 	<div class="col-xl-6">
 		<div class="login__form">
 			<label class="form__label">First Name</label>
-			<input class="common__login__input" type="text" placeholder="First Name">
+			{{ form_widget(registrationForm.first_name) }}
 
 		</div>
 	</div>
 	<div class="col-xl-6">
 		<div class="login__form">
 			<label class="form__label">Last Name</label>
-			<input class="common__login__input" type="password" placeholder="Last Name">
+			{{ form_widget(registrationForm.last_name) }}
 
 		</div>
 	</div>
 	<div class="col-xl-6">
 		<div class="login__form">
 			<label class="form__label">Username</label>
-			<input class="common__login__input" type="password" placeholder="Username">
+			{{ form_widget(registrationForm.user_name) }}
 
 		</div>
 	</div>
