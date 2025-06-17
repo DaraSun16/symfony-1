@@ -10,6 +10,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CategoriesCrudController extends AbstractCrudController
@@ -31,7 +33,8 @@ class CategoriesCrudController extends AbstractCrudController
             SlugField::new('slug')->setTargetFieldName('name'),
             Field::new('imageFile')
                 ->setFormType(VichImageType::class)
-                ->onlyOnForms()
+                ->onlyOnForms(),
+            AssociationField::new('categories')
         ];
     }
 }

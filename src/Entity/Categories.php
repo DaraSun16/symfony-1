@@ -15,6 +15,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 class Categories
 {
+    public function __toString()
+    {
+        return $this->name ??'';
+    }
     use DateTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -56,7 +56,7 @@
             {% include '_partials/topbar.html.twig' %}
             {{ render(controller('\\App\\Api\\MenuController::navbar')) }}
                 {% block body %}{% endblock %}
-                {% import '_partials/footer.html.twig' as footer %}
+                {% include '_partials/footer.html.twig' %}
             </main>
             
         </body>
