@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Users;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,10 +19,18 @@ class RegistrationForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('first_name')
-            ->add('last_name')
-            ->add('user_name')
+            ->add('email', EmailType::class, [
+                'attr'=> ['class'=>'common__login__input']
+            ])
+            ->add('first_name', TextType::class, [
+                'attr'=> ['class'=> 'common__login__input']
+            ])
+            ->add('last_name', TextType::class, [
+                'attr'=> ['class'=>'common__login__input']
+            ])
+            ->add('user_name', TextType::class, [
+                'attr'=> ['class'=>'common__login__input']
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
